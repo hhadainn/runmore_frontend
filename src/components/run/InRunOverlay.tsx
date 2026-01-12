@@ -1,7 +1,6 @@
 import React, { useMemo } from "react";
 import { View, StyleSheet, Dimensions } from "react-native";
 import RunProgressBar from "./RunProgressBar";
-import RunMetrics from "./RunMetrics";
 import RunControls from "./RunControls";
 import { calcBread } from "./utils/carrot";
 
@@ -64,17 +63,18 @@ export default function InRunOverlay({
   return (
     <View pointerEvents="box-none" style={styles.container}>
       {/* 상단 Progress Bar */}
-      <RunProgressBar carrotCount={carrotCount} />
+      <RunProgressBar distanceKm={distanceKm} goalKm={goalKm} />
 
-      {/* 메트릭 카드 (Pace / Distance / Time) */}
-      <RunMetrics
+
+      {/* 하단 컨트롤 버튼 */}
+      <RunControls
+        isPaused={isPaused}
+        onPause={onPause}
+        onEnd={onStop}
         pace={paceFormatted}
         distance={distanceFormatted}
         time={timeFormatted}
       />
-
-      {/* 하단 컨트롤 버튼 */}
-      <RunControls isPaused={isPaused} onPause={onPause} onEnd={onStop} />
     </View>
   );
 }
